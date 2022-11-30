@@ -12,3 +12,13 @@ class RegisterForm(forms.ModelForm):
             'password': forms.PasswordInput(attrs={'class':'form-control form-control-lg'}),
             'phoneNumber': forms.TextInput(attrs={'class':'form-control form-control-lg'}),
         }
+
+class LoginForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('email', 'password')
+
+        widgets = {
+            'email': forms.TextInput(attrs={'class':'form-control form-control-lg'}),
+            'password': forms.PasswordInput(attrs={'class':'form-control form-control-lg'}),
+        }

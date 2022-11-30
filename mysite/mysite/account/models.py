@@ -6,3 +6,6 @@ class User(models.Model):
     password = models.CharField(max_length=30, blank=False, null=False)
     phoneNumber = models.CharField(max_length=11, blank=False, null=False)
 
+    def __str__(self):
+        return "Name: " + self.fullName + "||||||" + "Passsword: " + self.password
+

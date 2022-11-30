@@ -1,0 +1,102 @@
+{% extends "account/base/base.html" %}
+{% load static %}
+{% block title %}
+Register
+{% endblock %}
+{% block content %}
+<div class="bg-light py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-0"><a href="/">Home</a> <span class="mx-2 mb-0">/</span> <strong
+                    class="text-black">Login</strong></div>
+        </div>
+    </div>
+</div>
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100"
+            style="margin-top: 40px;margin-bottom: 40px;">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                    class="img-fluid" alt="Sample image">
+            </div>
+
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <form action="{% url 'account:login' %}" method="post">
+                    <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                    </div>
+                    <!-- <div class="form-outline mb-4">
+                        <label class="form-label" for="id_fullName">Full Name</label>
+                        <p>{{ f.fullName }}</p>    
+                    </div> -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form3Example3">Email address</label>
+                        <p>{{ f.email }}</p>                
+                    </div>
+                    <div class="form-outline mb-3">
+                        <label class="form-label" for="form3Example4">Password</label>
+                        <p>{{ f.password }}</p>
+                    </div>
+                    <!-- <div class="form-outline mb-3">
+                        <label class="form-label" for="form3Example4">Phone number</label>
+                        <p>{{ f.phoneNumber }}</p>
+                    </div> -->
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <button type="submit" class="btn btn-primary btn-lg"
+                            style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                        <p class="medium fw-bold mt-2 pt-1 mb-0">Create account? <a href="{% url 'account:register' %}"
+                                class="link-danger">Register</p>
+                    </div>
+                    {% csrf_token %}
+                </form>
+                <br>
+                {% if message %}
+                    <div class="alert alert-info" role="alert" style="margin-top: 10px"> {{message}} </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- here -->
+
+</section>
+
+
+<div class="site-section block-3 site-blocks-2 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="nonloop-block-3 owl-carousel">
+                    <div class="item">
+                        <div class="block-4 text-center">
+                            <figure class="block-4-image">
+                                <img src="#" alt="Image placeholder" class="img-fluid">
+                            </figure>
+                            <div class="block-4-text p-4">
+                                <h3><a href="#">T-Shirt Mockup</a></h3>
+                                <p class="mb-0">Finding perfect products</p>
+                                <p class="text-primary font-weight-bold">$50</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="block-4 text-center">
+                            <!-- <figure class="block-4-image">
+                                <img src="images/shoe_1.jpg" alt="Image placeholder" class="img-fluid">
+                            </figure> -->
+                            <div class="block-4-text p-4">
+                                <h3><a href="#">Corater</a></h3>
+                                <p class="mb-0">Finding perfect products</p>
+                                <p class="text-primary font-weight-bold">$50</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

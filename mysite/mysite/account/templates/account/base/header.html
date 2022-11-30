@@ -26,8 +26,14 @@
                 <li><a href="transaction.html">Transactions</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
-                <li><a href="register.html">Register</a></li>
-                <li><a href="login.html">Login</a></li>
+                {% if current_user %}
+                    <li><a href="{% url 'account:logout' %}">Logout</a></li>
+                    <hr>
+                    <h2>Welcome <span style="color: dodgerblue;">{{current_user}}</span>!</h2>
+                {% else %}
+                    <li><a href="{% url 'account:register' %}">Register</a></li>
+                    <li><a href="{% url 'account:login' %}">Login</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
