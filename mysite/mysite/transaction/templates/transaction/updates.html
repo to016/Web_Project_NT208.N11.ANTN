@@ -1,0 +1,71 @@
+{% extends "shop/base/base.html" %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% block content %}
+<div class="bg-light py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-0"><a href="/">Home</a> <span class="mx-2 mb-0">/</span> <strong
+                    class="text-black">Updates</strong></div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-9 order-2">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First name</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">Total cost</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{ order.first_name }}</td>
+                            <td>{{ order.created }}</td>
+                            <td>{{ order.total_cost }}$</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+            <div class="col-md-3 order-1 mb-5 mb-md-0">
+                <form action="" method="get">
+                    <div class="border p-4 rounded mb-4">
+                        <h3 class="mb-3 h6 text-uppercase text-black d-block">Sort by</h3>
+                            <ul class="list-unstyled mb-0">
+                                    <li class="mb-1">
+                                        <input type="checkbox" name="sort" value="first_name" {% if 'first_name' in sort %} checked {% endif %}>name</button>
+                                    </li>
+                                    <li class="mb-1">
+                                        <input type="checkbox" name="sort" value="-created" {% if '-created' in sort %} checked {% endif %}>date</button>
+                                    </li>
+                                    <li class="mb-1">
+                                        <input type="checkbox" name="sort" value="total_cost" {% if 'total_cost' in sort %} checked {% endif %}>cost</button>
+                                    </li>
+                            </ul>
+                    </div>
+                    <div class="border p-4 rounded mb-4">
+                        <h3 class="mb-3 h6 text-uppercase text-black d-block">Limit</h3>
+                        <ul class="list-unstyled mb-0">
+                            <input type="range" class="form-range" name="limit" min="1" max="15" value="{{ limit }}" id="customRange2" onchange="document.getElementById('limitVal').innerHTML=this.value">
+                            <span id="limitVal">{{ limit }}</span>
+                        </ul>
+                    </div>
+                    <div class="border p-4 rounded mb-4">
+                        <button type="submit" class="btn btn-block">Show</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

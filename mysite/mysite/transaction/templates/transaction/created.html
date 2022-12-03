@@ -1,0 +1,11 @@
+{% extends "shop/base/base.html" %}
+{% block title %}
+Thank you
+{% endblock %}
+{% block content %}
+<div class="container text-center mt-5 mb-5">
+    <h1>Thank you</h1>
+    <h3>Your transaction has been successfully completed. Your transaction code is
+    <strong>{{ transaction.transaction_code }}</strong>. Use it to track information.</h3>
+</div>
+{% endblock %}

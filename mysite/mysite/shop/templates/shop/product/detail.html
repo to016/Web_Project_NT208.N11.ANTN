@@ -1,0 +1,44 @@
+{% extends "shop/base/base.html" %}
+{% load static %}
+{% block title %}
+{{ product.name }}
+{% endblock %}
+{% block content %}
+<div class="bg-light py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-0"><a href="/">Home</a> <span class="mx-2 mb-0">/</span> <strong
+                    class="text-black">{{ product.name }}</strong></div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{ product.image.url }}" alt="Image" class="img-fluid">
+            </div>
+            <div class="col-md-8">
+                <h2 class="text-black mr-2">{{ product.name }}</h2>
+                <p>Uploaded at {{ product.created }}</p>
+                </p>
+                <p><strong class="text-primary h4">Owner: {{ product.owner }}</strong></p>
+
+                <p>{{ product.description|linebreaks }}</p>
+                <div class="mt-5 col-md-5">
+                    <form>
+                        <!-- <input type="submit" class="buy-now btn btn-sm btn-primary" value=""> -->
+                        <button type="button" class="btn btn-primary" id="button-product" value={{product.id}} onclick="create()">Create transaction</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+{% endblock %}

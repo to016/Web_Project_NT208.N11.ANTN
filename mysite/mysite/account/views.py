@@ -32,7 +32,7 @@ def login(request):
             if check_user:
                 request.session['user'] = email
                 request.session['uname'] = check_user[0].fullName
-                return redirect('account:home')
+                return redirect('shop:product_list')
             else: # Wrong password or email;
                 return render(request, 'account/login.html', { 'f' : loginForm, 'message' : 'Email or Password is wrong' })
 
@@ -41,13 +41,13 @@ def login(request):
         loginForm = LoginForm
         return render(request, 'account/login.html', { 'f' : loginForm})
 
-def home(request):
-    loginForm = LoginForm
-    if 'user' in request.session:
-        param = {'current_user': request.session['uname']}
-        return render(request, 'account/home.html', param)
-    else:
-        return render(request, 'account/login.html', { 'f' : loginForm})
+# def home(request):
+#     loginForm = LoginForm
+#     if 'user' in request.session:
+#         param = {'current_user': request.session['uname']}
+#         return render(request, 'account/home.html', param)
+#     else:
+#         return render(request, 'account/login.html', { 'f' : loginForm})
 
 def logout(request):
     loginForm = LoginForm
