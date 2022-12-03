@@ -53,6 +53,8 @@ def logout(request):
     loginForm = LoginForm
     try:
         del request.session['user']
+        del request.session['uname']
+
     except:
         return redirect('account:login')
     return redirect('account:login')

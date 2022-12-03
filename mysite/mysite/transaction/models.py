@@ -19,6 +19,7 @@ class Transaction(models.Model):
     customer_username = models.CharField(max_length=32)
     status = models.DecimalField(decimal_places=0, max_digits=1 ,default=2)
 
+
     class Meta:
         ordering = ('created',)
 

@@ -23,10 +23,10 @@
         <div class="container">
             <ul class="site-menu js-clone-nav d-none d-md-block">
                 <li><a href="{% url 'shop:product_list' %}">Shop</a></li>
-                <li><a href="transaction.html">Transactions</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                {% if request.session.uname %}
+                <li><a href="{% url 'transaction:transaction_list' %}">Transactions</a></li>
+                <li><a href="{% url 'shop:about' %}">About</a></li>
+                <li><a href="">Contact</a></li>
+                {% if request.session.user %}
                     <li><a href="{% url 'account:logout' %}">Logout</a></li>
                     <hr>
                     <h2>Welcome <span style="color: dodgerblue;">{{request.session.uname}}</span>!</h2>

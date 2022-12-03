@@ -5,7 +5,7 @@ from .models import Category, Product
 def product_list(request, category_slug=None):
     sort = ['-created']
     limit = 10
-    category = None
+    category = None 
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
     if category_slug:
@@ -26,3 +26,6 @@ def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     context = {'product': product}
     return render(request, 'shop/product/detail.html', context)
+
+def about(request):
+    return render(request,'shop/base/about.html')

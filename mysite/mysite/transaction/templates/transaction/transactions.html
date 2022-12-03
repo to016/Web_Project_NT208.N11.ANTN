@@ -1,0 +1,68 @@
+{% extends "shop/base/base.html" %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% block content %}
+<div class="site-section">
+    <div class="container">
+        <h1 class="text-center">Transaction History</h1>
+        <div class="order-info">
+
+            <!-- <h3 class="text-center">Here you can see detailed information about your order</h3><br> -->
+            {% for transaction_history in transaction_history_arr %}
+                <div class="site-blocks-table">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="product-thumbnail">Image</th>
+                                <th class="product-name">Product</th>
+                                <!-- <th class="product-price">Price</th> -->
+                                <th class="product-total">Transaction ID</th>
+                                <th class="product-remove">Description</th>
+                                <th class="product-remove">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <tr>
+                                <td class="product-thumbnail">
+                                    <img src="{{transaction_history.image.url}}" alt="Image"
+                                        class="img-fluid">
+                                </td>
+                                <td class="product-name">
+                                    <h2 class="h5 text-black">{{transaction_history.productname}}</h2>
+                                </td>
+
+                                <td><a
+                                        href="{% url 'transaction:transaction_details' transaction_history.transactionID  %}">{{transaction_history.transactionID}}</a>
+                                </td>
+                                <td>{{transaction_history.description}}</td>
+                                <td>
+                                    {% if transaction_history.status == 0 %}
+                                    <strong>
+                                        <p style="color: palevioletred;font-size:20px;">Rejected</p>
+                                        <!-- class="btn btn-primary btn-sm" -->
+                                    </strong>
+                                    {% elif transaction_history.status == 1 %}
+                                        <strong> <p style="color: limegreen;font-size:20px;">Accepted</p> </strong>
+                                    {% elif transaction_history.status == 2 %}
+                                    <strong>
+                                        <a style="color: darkorange;font-size:20px;">Pending</a>
+                                    </strong>
+                                    {% endif %}
+                                    
+                                </td>
+                            </tr>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+            {% endfor %}
+
+
+
+{% endblock %}

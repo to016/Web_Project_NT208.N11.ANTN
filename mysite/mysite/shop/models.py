@@ -29,6 +29,7 @@ class Product(models.Model):
     owner = models.CharField(max_length=30, db_index=True)
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
+    need = models.CharField(max_length=100, blank=False)
     # updated = models.DateTimeField(auto_now=True)
 
     class Meta:

@@ -26,7 +26,7 @@
                 <li><a href="transaction.html">Transactions</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
-                {% if current_user %}
+                {% if request.session.user %}
                     <li><a href="{% url 'account:logout' %}">Logout</a></li>
                     <hr>
                     <h2>Welcome <span style="color: dodgerblue;">{{current_user}}</span>!</h2>
