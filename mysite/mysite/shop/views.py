@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Product
+from django.contrib import messages
 
 
 def product_list(request, category_slug=None):
@@ -23,9 +24,17 @@ def product_list(request, category_slug=None):
 
 
 def product_detail(request, id, slug):
-    product = get_object_or_404(Product, id=id, slug=slug, available=True)
-    context = {'product': product}
-    return render(request, 'shop/product/detail.html', context)
+    if request.method == 'POST':
+        product = Product.objects.filter(id=id).first()
+        if product.owner == request.session['user']:
+            messages.error(request, 'You cannot order your own product')
+            return render(request, 'shop/product/detail.html', {'product': product})
+        else:
+            return redirect('transaction:transaction_create', id_sp=id)
+    else:
+        product = get_object_or_404(Product, id=id, slug=slug, available=True)
+        context = {'product': product}
+        return render(request, 'shop/product/detail.html', context)
 
 def about(request):
     return render(request,'shop/base/about.html')

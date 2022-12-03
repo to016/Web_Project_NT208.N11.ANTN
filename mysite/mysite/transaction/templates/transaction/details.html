@@ -50,10 +50,7 @@
                             <td class="text-center"><label><h5>Full name</h5></label></td>
                             <td class="text-center"><strong class="text-black">{{ transaction.fullName }}</strong></td>
                         </tr>
-                        <tr>
-                            <td class="text-center"><label><h5>Email</h5></label></td>
-                            <td class="text-center"><strong class="text-black">{{ transaction.email }}</strong></td>
-                        </tr>
+
                         <tr>
                             <td class="text-center"><label><h5>Address</h5></label></td>
                             <td class="text-center"><strong class="text-black">{{ transaction.address }}</strong></td>
@@ -96,16 +93,17 @@
                             <input type="submit" name="action" class="buy-now btn btn-sm btn-primary" value="Accept" style="margin-right: 15px;">
                             <input type="submit" name="action" class="buy-now btn btn-sm btn-primary" value="Reject">
                             <input type="hidden" name="transaction_code" value="{{transaction.transaction_code}}">
+                            {% csrf_token %}
                         </form>
 
                         {% endif %}
 
                         {% if transaction.status == 1 and request.session.user == product.owner%}
-                            <input type="submit" name="action" class="buy-now btn btn-sm btn-primary" value="Accepted" style="margin-right: 15px;">
+                            <input name="action" class="buy-now btn btn-sm btn-primary" value="Accepted" style="margin-right: 15px;">
                         {% endif %}                       
 
                         {% if transaction.status == 0 and request.session.user == product.owner%}
-                        <input type="submit" name="action" class="buy-now btn btn-sm btn-primary" value="Rejected" style="margin-right: 15px;">
+                        <input name="action" class="buy-now btn btn-sm btn-primary" value="Rejected" style="margin-right: 15px;">
                         {% endif %} 
 
                     </div>
