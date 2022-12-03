@@ -19,8 +19,9 @@ from django.conf import settings
 from django.urls import path, include
 
 urlpatterns = [
-    path('account/', include('account.urls')),
+    path('account/', include('account.urls', namespace='account')),
     path('admin/', admin.site.urls),
+    path('transaction/', include('transaction.urls', namespace='transaction')),
     path('', include('shop.urls', namespace='shop')),
 ]
 

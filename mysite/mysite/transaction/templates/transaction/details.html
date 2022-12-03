@@ -1,0 +1,125 @@
+{% extends "shop/base/base.html" %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% block content %}
+<div class="bg-light py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-0"><a href="/">Home</a> <span class="mx-2 mb-0">/</span> <strong
+                    class="text-black">My orders</strong></div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section">
+    <div class="container">
+        <h1 class="text-center">Order details</h1>
+        <div class="order-info">
+            {% if order_code and items %}
+            <h3 class="text-center">Here you can see detailed information about your order</h3><br>
+            <div class="site-blocks-table">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="product-thumbnail">Image</th>
+                            <th class="product-name">Product</th>
+                            <th class="product-price">Price</th>
+                            <th class="product-quantity">Quantity</th>
+                            <th class="product-total">License key</th>
+                            <th class="product-remove">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        {% with product=item.product %}
+                        <tr>
+                            <td class="product-thumbnail">
+                                <img src="{{ product.image.url }}" alt="Image" class="img-fluid">
+                            </td>
+                            <td class="product-name">
+                                <h2 class="h5 text-black">{{ product.name }}</h2>
+                            </td>
+                            <td>${{ item.price }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ product.license_key }}</td>
+                            <td>{{ product.description }}</td>
+                        </tr>
+                        {% endwith %}
+                        {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br/>
+            <div class="table">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td class="text-center"><label><h5>First name</h5></label></td>
+                            <td class="text-center"><strong class="text-black">{{ order.first_name }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><label><h5>Last name</h5></label></td>
+                            <td class="text-center"><strong class="text-black">{{ order.last_name }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><label><h5>Email</h5></label></td>
+                            <td class="text-center"><strong class="text-black">{{ order.email }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><label><h5>Address</h5></label></td>
+                            <td class="text-center"><strong class="text-black">{{ order.address }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><label><h5>Postal code</h5></label></td>
+                            <td class="text-center"><strong class="text-black">{{ order.postal_code }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><label><h5>City</h5></label></td>
+                            <td class="text-center"><strong class="text-black">{{ order.city }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><label><h5>Paid</h5></label></td>
+                            <td class="text-center"><strong class="text-black">{{ order.paid }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><label><h5>Comment</h5></label></td>
+                            <td class="text-center"><strong class="text-black">{{ order.comment }}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-md-12 text-right border-bottom mb-5">
+                            <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-6">
+                            <span class="text-black">Total</span>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <strong class="text-black">${{ order.total_cost }}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% elif order_code %}
+            <h3 class="text-center">Invalid order code</h3>
+            <form action="" method="get">
+                <input name="order_code" class="form-control form-control-lg" type="text" style="height: 3em" placeholder="Order code">
+            </form>
+            {% else %}
+            <h3 class="text-center">Enter your order code to get detailed information</h3>
+            <form action="" method="get">
+                <input name="order_code" class="form-control form-control-lg" type="text" style="height: 3em" placeholder="Order code">
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

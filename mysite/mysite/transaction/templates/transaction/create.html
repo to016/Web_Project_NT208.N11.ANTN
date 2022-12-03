@@ -1,0 +1,73 @@
+{% extends "shop/base/base.html" %}
+{% load static %}
+{% block title %}
+Checkout
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+<div class="container">
+    <h1 class="text-center">Checkout</h1>
+    <div class="order-info">
+        <h3 class="text-center">Your transaction</h3>
+        <ul>
+            <li>
+                {{ product.name }}
+            </li>
+        </ul>
+    </div>
+    <form action='{% url "transaction:transaction_create" product.id %}' method="post" class="order-form" enctype="multipart/form-data" >
+
+
+        <div id="div_id_full_name" class="form-group"> <label for="id_full_name" class=" requiredField">
+                Full name<span class="asteriskField">*</span> </label>
+            <div> {{form.fullName}} </div>
+        </div>
+
+        <div id="div_id_email" class="form-group"> <label for="id_email" class="requiredField">
+                Email<span class="asteriskField">*</span> </label>
+            <div> {{form.email}} </div>
+        </div>
+        <div id="div_id_address" class="form-group"> <label for="id_address" class="requiredField">
+                Address<span class="asteriskField">*</span> </label>
+            <div> {{form.address}} </div>
+        </div>
+
+        <div id="div_id_city" class="form-group"> <label for="id_city" class=" requiredField">
+                City<span class="asteriskField">*</span> </label>
+            <div> {{form.city}} </div>
+        </div>
+        <div id="div_id_comment" class="form-group"> <label for="id_comment" class=" requiredField">
+                Comment<span class="asteriskField">*</span> </label>
+            <div> {{form.comment}} </div>
+        </div>
+        <div id="div_id_comment" class="form-group"> <label for="id_comment" class=" requiredField">
+                Attachments<span class="asteriskField">*</span> </label>
+            <div>
+                {{ form.attachment }}
+                <img id="uploaded_picture" src='{% static "images/blank.png" %}' width="10" height="10" />
+                <script>
+                    id_file.onchange = evt => {
+                        const [file] = id_file.files
+                        if (file) {
+                            uploaded_picture.src = URL.createObjectURL(file)
+                            uploaded_picture.width = "300"
+                            uploaded_picture.height = "300"
+                        }
+                    }
+                </script>
+            </div>
+
+        </div>
+        {% csrf_token %}
+        <p><input class="btn btn-primary btn-sm btn-block" type="submit" value="Create transaction"></p>
+    </form>
+
+</div>
+{% endblock %}
